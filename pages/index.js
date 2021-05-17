@@ -13,7 +13,7 @@ export default function Home({ pokemon }) {
   return (
     <Layout title='Home'>
           <Heading fontSize='4xl' m={8}>Cards</Heading>
-            <Grid  templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)', '2xl': 'repeat(5, 1fr)'}} gap={6} p={10}>
+            <Grid  templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)', '2xl': 'repeat(5, 1fr)'}} gap={4} p={10}>
               {pokemon.map((pokeman, index) => (
                   <NextLink key={index} href={`/pokemon?id=${index +1}`}>
                       <a className={styles.tags}>
@@ -48,7 +48,7 @@ export default function Home({ pokemon }) {
                           borderRadius={30} 
                           userSelect='none'
                           p={8} >
-                            <Image as={ motion.img } srcSet={pokeman.image} alt={pokeman.name} width={200} height={200} priority quality={10} 
+                            <Image as={ motion.img } src={pokeman.image} srcSet={pokeman.image} alt={pokeman.name} width={200} height={200} quality={10} 
                               layoutId={pokeman.image}
                               animate={{ scale: 0.9 }}
                               whileHover={{ scale: 1.1 }}
