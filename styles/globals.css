@@ -9,8 +9,17 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+
+}
+ul {
+  list-style: none;
+}
+span {
+  margin-right: 2px;
+  font-weight: bold;
 }
 
 * {
   box-sizing: border-box;
+
 }
