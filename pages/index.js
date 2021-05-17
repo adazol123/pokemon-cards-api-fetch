@@ -11,7 +11,7 @@ export default function Home({ pokemon }) {
   return (
     <Layout title='Home'>
           <Heading fontSize='4xl' m={8}>Cards</Heading>
-            <Grid templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)', '2xl': 'repeat(5, 1fr)'}} gap={6} p={10}>
+            <Grid  templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)', '2xl': 'repeat(5, 1fr)'}} gap={6} p={10}>
               {pokemon.map((pokeman, index) => (
                   <NextLink key={index} href={`/pokemon?id=${index +1}`}>
                       <a className={styles.tags}>
@@ -22,6 +22,7 @@ export default function Home({ pokemon }) {
                           border='lightsteelblue solid 1px' 
                           // boxSize={300} 
                           borderRadius={30} 
+                          userSelect='none'
                           p={8} >
                             <NextImage src={pokeman.image} alt={pokeman.name} width={200} height={200} priority quality={20}/>
                             {/* <span>{ index + 1 } </span> */}
