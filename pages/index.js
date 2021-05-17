@@ -13,8 +13,7 @@ export default function Home({ pokemon }) {
           <Heading fontSize='4xl' m={8}>Cards</Heading>
             <Grid templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)', '2xl': 'repeat(5, 1fr)'}} gap={6} p={10}>
               {pokemon.map((pokeman, index) => (
-                <GridItem key={index}>
-                  <NextLink href={`/pokemon?id=${index +1}`}>
+                  <NextLink key={index} href={`/pokemon?id=${index +1}`}>
                       <a className={styles.tags}>
                         <Box
                           cursor='pointer'
@@ -23,8 +22,7 @@ export default function Home({ pokemon }) {
                           border='lightsteelblue solid 1px' 
                           // boxSize={300} 
                           borderRadius={30} 
-                          p={8}  
-                          m={6} >
+                          p={8} >
                             <NextImage src={pokeman.image} alt={pokeman.name} width={200} height={200} priority quality={20}/>
                             {/* <span>{ index + 1 } </span> */}
                             <Text fontSize="md" >
@@ -34,7 +32,6 @@ export default function Home({ pokemon }) {
                       </a>
                                         
                   </NextLink>
-                </GridItem>
                 
               ))}
             </Grid>
