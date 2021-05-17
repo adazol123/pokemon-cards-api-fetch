@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.css'
 import { Button, Box, Flex, Heading, useColorMode, useColorModeValue, Image, Text, Grid, GridItem, List, UnorderedList, ListItem } from '@chakra-ui/react'
 import Layout from '../components/Layout'
 import NextLink from 'next/link'
+import { motion } from 'framer-motion'
 
 
 export default function Home({ pokemon }) {
@@ -32,7 +33,13 @@ export default function Home({ pokemon }) {
                           borderRadius={30} 
                           userSelect='none'
                           p={8} >
-                            <NextImage src={pokeman.image} alt={pokeman.name} width={200} height={200} priority quality={20}/>
+                            <motion.img src={pokeman.image} alt={pokeman.name} width={200} height={200} priority quality={20} 
+                              layoutId={pokeman.name}
+                              animate={{ scale: 0.9 }}
+                              whileHover={{ scale: 1.1 }}
+                              whileTap={{ scale: 1.0 }}
+                              whileFocus={{scale : 1.4}}
+                              />
                             {/* <span>{ index + 1 } </span> */}
                             <Text fontSize="md" >
                             { pokeman.name }

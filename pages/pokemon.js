@@ -1,11 +1,14 @@
 import Layout from "../components/Layout"
 import NextLink from 'next/link'
-import { Heading, Text, Button, Flex, Stack, HStack, Tag } from "@chakra-ui/react"
+import { Heading, Text, Button, Flex, Stack, HStack, Tag, Image } from "@chakra-ui/react"
 import NextImage from "next/image"
 import { ChevronLeftIcon, ArrowBackIcon } from "@chakra-ui/icons"
+import { useRouter } from 'next/router'
+import { motion } from "framer-motion"
 
 export default function pokemon( {pokeman }) {
     console.log(pokeman)
+    const { query: { index },} = useRouter()
     return (
         <Layout title={ pokeman.name} >
             <Flex my={2} px={2} justifyContent='flex-start' w='100vw' alignItems='center'>
@@ -19,7 +22,10 @@ export default function pokemon( {pokeman }) {
                 </NextLink>
             </Flex>
             <Flex flex={1} flexDirection='column' alignItems='center' justifyContent='center'>
-                <NextImage src={pokeman.image} alt={pokeman.name} width={300} height={300} quality={20} priority />
+                <motion.img src={pokeman.image} alt={pokeman.name} width={300} height={300} quality={20} priority
+                    layoutId={pokeman.name}
+                    whileTap={{ scale: 0.8 }}
+                    />
                 <Heading mb={2} fontSize='4xl' textTransform='capitalize'> { pokeman.name }</Heading>
                 <hr />
                 <Text mt={8}><span>Weight: </span> {pokeman.weight}</Text>
