@@ -5,7 +5,7 @@ import { MoonIcon, SunIcon } from '@chakra-ui/icons'
 
 export default function Layout({ title, children }) {
     const { colorMode, toggleColorMode } = useColorMode()
-    const formBackground = useColorModeValue('gray.100','gray.700')
+    const formBackground = useColorModeValue('blackAlpha.100','blackAlpha.300')
     const containerBackground = useColorModeValue('gray.200','gray.800')
 
     return (
@@ -18,18 +18,17 @@ export default function Layout({ title, children }) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Flex 
-                w='full' 
                 px={6} 
                 py={3} 
                 justifyContent='space-between' 
                 alignItems='center' 
                 background={ formBackground } 
-                borderBottom='azure'
+                boxShadow='md'
 
             >
 
                 <Heading fontSize='medium' fontWeight={400} textDecoration='linen' textTransform='capitalize'> adazolhub  |  { title }</Heading>
-                <Button onClick={ toggleColorMode } variant='outline' rounded='full' bg='blackAlpha.400'>
+                <Button onClick={ toggleColorMode } variant='outline' rounded='full' boxSize={10} bg='blackAlpha.200'>
                     {colorMode === 'dark' ? <MoonIcon/> : <SunIcon/>}
                 </Button>
             </Flex>

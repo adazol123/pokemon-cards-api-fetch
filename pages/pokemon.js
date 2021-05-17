@@ -1,6 +1,6 @@
 import Layout from "../components/Layout"
 import NextLink from 'next/link'
-import { Heading, Text, Button, Flex } from "@chakra-ui/react"
+import { Heading, Text, Button, Flex, Stack, HStack, Tag } from "@chakra-ui/react"
 import NextImage from "next/image"
 import { ChevronLeftIcon, ArrowBackIcon } from "@chakra-ui/icons"
 
@@ -19,15 +19,21 @@ export default function pokemon( {pokeman }) {
                 </NextLink>
             </Flex>
             <Flex flex={1} flexDirection='column' alignItems='center' justifyContent='center'>
-                <NextImage src={pokeman.image} alt={pokeman.name} width={300} height={300} quality={100} priority />
+                <NextImage src={pokeman.image} alt={pokeman.name} width={300} height={300} quality={20} priority />
                 <Heading mb={2} fontSize='4xl' textTransform='capitalize'> { pokeman.name }</Heading>
                 <hr />
                 <Text mt={8}><span>Weight: </span> {pokeman.weight}</Text>
                 <Text><span>Height: </span> {pokeman.height}</Text>
                 <Heading my={2}>Types</Heading> 
-                { pokeman.types.map((type, index) => (
-                        <p key={index}>{type.type.name}</p>
-                ))}
+                <HStack my={3} spacing={3}>
+                    { pokeman.types.map((type, index) => (
+
+                            <Tag key={index}
+                                size="lg" colorScheme='green' borderRadius="full" textTransform='capitalize'
+                                px={4}
+                            >{type.type.name}</Tag>
+                    ))}
+                </HStack>
             </Flex>
 
         </Layout>

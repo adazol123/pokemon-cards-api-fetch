@@ -7,7 +7,7 @@ import NextLink from 'next/link'
 
 
 export default function Home({ pokemon }) {
-  console.log(pokemon)
+  // console.log(pokemon)
   return (
     <Layout title='Home'>
           <Heading fontSize='4xl' m={8}>Cards</Heading>
@@ -16,10 +16,18 @@ export default function Home({ pokemon }) {
                   <NextLink key={index} href={`/pokemon?id=${index +1}`}>
                       <a className={styles.tags}>
                         <Box
+                          boxShadow="base"
                           cursor='pointer'
+                          _hover={{
+                            background: 'blackAlpha.100',
+                            color: "teal.400",
+                            fontWeight:'semibold',
+                            boxShadow:"lg",
+                            varient: 'smooth'
+                          }}
                           // w="100%"
                           // h={300}
-                          border='lightsteelblue solid 1px' 
+                          // border='lightsteelblue solid 1px' 
                           // boxSize={300} 
                           borderRadius={30} 
                           userSelect='none'
