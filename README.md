@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-![home-page image](/public/home-page.png)
+![home-page image](/public/pokemon-cards.png)
 
 First, run the development server:
 
