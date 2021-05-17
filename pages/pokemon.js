@@ -19,7 +19,7 @@ export default function pokemon( {pokeman }) {
                 </NextLink>
             </Flex>
             <Flex flex={1} flexDirection='column' alignItems='center' justifyContent='center'>
-                <NextImage src={pokeman.image} alt={pokeman.name} width={300} height={300} quality={10} priority />
+                <NextImage src={pokeman.image} alt={pokeman.name} width={300} height={300} quality={100} priority />
                 <Heading mb={2} fontSize='4xl' textTransform='capitalize'> { pokeman.name }</Heading>
                 <hr />
                 <Text mt={8}><span>Weight: </span> {pokeman.weight}</Text>

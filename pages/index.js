@@ -1,45 +1,43 @@
 import Head from 'next/head'
 import NextImage from 'next/image'
 import styles from '../styles/Home.module.css'
-import { Button, Box, Flex, Heading, useColorMode, useColorModeValue, Image, Text } from '@chakra-ui/react'
+import { Button, Box, Flex, Heading, useColorMode, useColorModeValue, Image, Text, Grid, GridItem, List, UnorderedList, ListItem } from '@chakra-ui/react'
 import Layout from '../components/Layout'
 import NextLink from 'next/link'
 
 
 export default function Home({ pokemon }) {
+  console.log(pokemon)
   return (
     <Layout title='Home'>
           <Heading fontSize='4xl' m={8}>Cards</Heading>
-          <Box>
-            <ul >
+            <Grid templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)', '2xl': 'repeat(5, 1fr)'}} gap={6} p={10}>
               {pokemon.map((pokeman, index) => (
-                <li key={index}>
+                <GridItem key={index}>
                   <NextLink href={`/pokemon?id=${index +1}`}>
-                    <Box 
-                      border='lightsteelblue solid 1px' 
-                      boxSize={300} 
-                      borderRadius={30} 
-                      p={8}  
-                      m={6} 
-                      display="grid"
-                      flexDirection="column"
-                      justifyContent="flex-end"
-                      alignItems='center'>
                       <a className={styles.tags}>
-                        <NextImage src={pokeman.image} alt={pokeman.name} width={300} height={300} priority/>
-                        {/* <span>{ index + 1 } </span> */}
-                        <Text fontSize="md">
-                         { pokeman.name }
-                        </Text> 
+                        <Box
+                          cursor='pointer'
+                          // w="100%"
+                          // h={300}
+                          border='lightsteelblue solid 1px' 
+                          // boxSize={300} 
+                          borderRadius={30} 
+                          p={8}  
+                          m={6} >
+                            <NextImage src={pokeman.image} alt={pokeman.name} width={200} height={200} priority quality={20}/>
+                            {/* <span>{ index + 1 } </span> */}
+                            <Text fontSize="md" >
+                            { pokeman.name }
+                            </Text> 
+                        </Box>
                       </a>
                                         
-                    </Box>
                   </NextLink>
-                </li>
+                </GridItem>
                 
               ))}
-            </ul>
-          </Box>
+            </Grid>
     </Layout>
   )
 }
