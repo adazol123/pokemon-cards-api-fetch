@@ -1,10 +1,11 @@
 import Head from 'next/head'
 import NextImage from 'next/image'
 import styles from '../styles/Home.module.css'
-import { Button, Box, Flex, Heading, useColorMode, useColorModeValue, Image, Text, Grid, GridItem, List, UnorderedList, ListItem } from '@chakra-ui/react'
+import { Button, Box, Flex, Heading, useColorMode, useColorModeValue, Image, Text, Grid, GridItem, List, UnorderedList, ListItem, Img } from '@chakra-ui/react'
 import Layout from '../components/Layout'
 import NextLink from 'next/link'
 import { motion } from 'framer-motion'
+
 
 
 export default function Home({ pokemon }) {
@@ -26,6 +27,20 @@ export default function Home({ pokemon }) {
                             boxShadow:"lg",
                             varient: 'smooth'
                           }}
+                          _active={{
+                            background: 'blackAlpha.100',
+                            color: "teal.400",
+                            fontWeight:'semibold',
+                            boxShadow:"lg",
+                            varient: 'smooth'
+                          }}
+                          _focus={{
+                            background: 'blackAlpha.100',
+                            color: "teal.400",
+                            fontWeight:'semibold',
+                            boxShadow:"lg",
+                            varient: 'smooth'
+                          }}
                           // w="100%"
                           // h={300}
                           // border='lightsteelblue solid 1px' 
@@ -33,17 +48,19 @@ export default function Home({ pokemon }) {
                           borderRadius={30} 
                           userSelect='none'
                           p={8} >
-                            <motion.img src={pokeman.image} alt={pokeman.name} width={200} height={200} priority quality={20} 
-                              layoutId={pokeman.name}
+                            <Image as={ motion.img } srcSet={pokeman.image} alt={pokeman.name} width={200} height={200} priority quality={10} 
+                              layoutId={pokeman.image}
                               animate={{ scale: 0.9 }}
                               whileHover={{ scale: 1.1 }}
                               whileTap={{ scale: 1.0 }}
                               whileFocus={{scale : 1.4}}
                               />
                             {/* <span>{ index + 1 } </span> */}
-                            <Text fontSize="md" >
+                            <Heading as={motion.h1} fontSize="md" 
+                            layoutId={pokeman.name}
+                             >
                             { pokeman.name }
-                            </Text> 
+                            </Heading> 
                         </Box>
                       </a>
                                         
@@ -54,6 +71,8 @@ export default function Home({ pokemon }) {
     </Layout>
   )
 }
+
+
 
 export async function getStaticProps(context) {
   try {

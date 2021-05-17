@@ -1,6 +1,6 @@
 import Layout from "../components/Layout"
 import NextLink from 'next/link'
-import { Heading, Text, Button, Flex, Stack, HStack, Tag, Image } from "@chakra-ui/react"
+import { Heading, Text, Button, Flex, Stack, HStack, Tag, Image, Img } from "@chakra-ui/react"
 import NextImage from "next/image"
 import { ChevronLeftIcon, ArrowBackIcon } from "@chakra-ui/icons"
 import { useRouter } from 'next/router'
@@ -22,29 +22,43 @@ export default function pokemon( {pokeman }) {
                 </NextLink>
             </Flex>
             <Flex flex={1} flexDirection='column' alignItems='center' justifyContent='center'>
-                <motion.img src={pokeman.image} alt={pokeman.name} width={300} height={300} quality={20} priority
-                    layoutId={pokeman.name}
+                <Image as={motion.img } srcSet={pokeman.image} alt={pokeman.name} width={300} height={300} quality={20} priority
+                    layoutId={pokeman.image}
                     whileTap={{ scale: 0.8 }}
+                    transition={spring} 
                     />
-                <Heading mb={2} fontSize='4xl' textTransform='capitalize'> { pokeman.name }</Heading>
+                <Heading as={motion.h1} mb={2} fontSize='4xl' textTransform='capitalize' color="teal.400"
+                    layoutId={pokeman.name}> { pokeman.name }</Heading>
                 <hr />
-                <Text mt={8}><span>Weight: </span> {pokeman.weight}</Text>
-                <Text><span>Height: </span> {pokeman.height}</Text>
-                <Heading my={2}>Types</Heading> 
-                <HStack my={3} spacing={3}>
-                    { pokeman.types.map((type, index) => (
+                <Flex flexDirection='column' width='full'>
+                    <Heading mt={10}  fontSize='2xl' >Status</Heading> 
+                    <Text px={4} mt={3}><span>Weight: </span> {pokeman.weight} KG</Text>
+                    <Text px={4} ><span>Height: </span> {pokeman.height} CM</Text>
+                </Flex>
+                <Flex flexDirection='column' width='full'>
 
-                            <Tag key={index}
-                                size="lg" colorScheme='green' borderRadius="full" textTransform='capitalize'
-                                px={4}
-                            >{type.type.name}</Tag>
-                    ))}
-                </HStack>
+                    <Heading mt={15}  fontSize='2xl' >Types</Heading> 
+                    <HStack my={3} spacing={3}>
+                        { pokeman.types.map((type, index) => (
+
+                                <Tag key={index}
+                                    size="lg" colorScheme='green' borderRadius="full" textTransform='capitalize'
+                                    px={4}
+                                >{type.type.name}</Tag>
+                        ))}
+                    </HStack>
+                                
+                </Flex>
             </Flex>
 
         </Layout>
     )
 }
+const spring = {
+    type: "spring",
+    stiffness: 700,
+    damping: 30
+  };
 
 
 export async function getServerSideProps({ query }) {
