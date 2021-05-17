@@ -61,7 +61,7 @@ const spring = {
   };
 
 
-export async function getServerSideProps({ query }) {
+export async function getStaticProps({ query }) {
     const id = query.id
     try {
         const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
