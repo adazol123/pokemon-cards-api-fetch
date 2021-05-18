@@ -9,8 +9,11 @@ import { motion } from 'framer-motion'
 
 
 export default function Home({ pokemon }) {
-  // console.log(pokemon)
+  console.log(pokemon)
+  
   return (
+    <>
+    { pokemon?
     <Layout title='Home'>
           <Heading fontSize='4xl' m={8}>Cards</Heading>
             <Grid  templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)', '2xl': 'repeat(5, 1fr)'}} gap={4} p={10}>
@@ -69,6 +72,8 @@ export default function Home({ pokemon }) {
               ))}
             </Grid>
     </Layout>
+    : <h1> Loading...</h1> }
+    </>
   )
 }
 
@@ -76,7 +81,7 @@ export default function Home({ pokemon }) {
 
 export async function getStaticProps(context) {
   try {
-    const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=150')
+    const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
     const { results } = await res.json()
     const pokemon = results.map((result, index) => {
       const paddedIndex = ('00' + ( index + 1)).slice(-3)
