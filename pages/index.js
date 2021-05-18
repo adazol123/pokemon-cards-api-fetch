@@ -10,7 +10,7 @@ import { motion } from 'framer-motion'
 
 export default function Home({ pokemon }) {
   console.log(pokemon)
-  
+
   return (
     <>
     { pokemon?
@@ -81,7 +81,7 @@ export default function Home({ pokemon }) {
 
 export async function getStaticProps(context) {
   try {
-    const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
+    const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100')
     const { results } = await res.json()
     const pokemon = results.map((result, index) => {
       const paddedIndex = ('00' + ( index + 1)).slice(-3)
