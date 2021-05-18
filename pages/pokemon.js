@@ -39,7 +39,7 @@ export default function pokemon({ pokeman }) {
                     </a>
                 </NextLink>
             </Flex>
-            <Flex flex={1} flexDirection='column' alignItems='center' justifyContent='center'>
+            <Flex flex={1} flexDirection='column' alignItems='center' justifyContent='center' px={6}>
                 <Image as={motion.img } srcSet={image} alt={name} width={300} height={300} quality={20} priority
                     layoutId={image}
                     whileTap={{ scale: 0.8 }}
@@ -77,7 +77,7 @@ export default function pokemon({ pokeman }) {
                         ))}
                     </HStack>
                     <Heading mt={15}  fontSize='2xl' >Special Moves</Heading> 
-                    <Flex justifyContent='normal' w={420} flexWrap='wrap' px={2} my={3}>
+                    <Flex justifyContent='normal' w='auto' bg='green' flexWrap='wrap' px={2} m={6}>
                         {moves.map(( specialMoves) => (
                            <Tag key={specialMoves.move.name}
                            size='sm' colorScheme='blue' height={8} w='fit-content' borderRadius="full" textTransform='capitalize'
