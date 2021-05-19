@@ -8,7 +8,7 @@ import { motion } from "framer-motion"
 
 
 
-export default function pokemon({ pokeman }) {
+export default function pokemon({ pokeman  } ) {
     const { id, image, name, weight, height, types, species: { name: speciesName}, abilities, moves } = pokeman //basic destructure
     // console.log(pokeman)
     // console.log(speciesName)
@@ -24,10 +24,12 @@ export default function pokemon({ pokeman }) {
     //     const { ability: {name: abiName, url} } = abilitys
     //     abilName = abiName
     // })
-    
+    // const ids = query.id
+    console.log(id)
+    const { isFallback } = useRouter()
     return (
         <>
-        {pokeman? 
+        {isFallback? <h1>Loading</h1> :
         <Layout title={ name} >
             <Flex my={2} px={2} justifyContent='flex-start' w='100vw' alignItems='center'>
                 <NextLink href='/'>
@@ -91,13 +93,14 @@ export default function pokemon({ pokeman }) {
                 </Flex>
             </Flex>
 
-        </Layout> : <h1>Loading</h1>}
+        </Layout> }
         </>
     )
 }
 
 
 export async function getServerSideProps({ query }) {
+   
     const id = query.id
     try {
         const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
@@ -105,14 +108,15 @@ export async function getServerSideProps({ query }) {
         const paddedIndex = ('00' + (id)).slice(-3)
         const image =`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${paddedIndex}.png`
         pokeman.image = image
-
         return {
-            props: { pokeman }
+            props: { pokeman },
+             
         }
 
     } catch (err) {
         console.error(err);
     }
 }
+
 
 

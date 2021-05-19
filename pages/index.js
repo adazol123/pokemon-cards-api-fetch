@@ -5,15 +5,21 @@ import { Button, Box, Flex, Heading, useColorMode, useColorModeValue, Image, Tex
 import Layout from '../components/Layout'
 import NextLink from 'next/link'
 import { motion } from 'framer-motion'
+import { useState } from 'react'
+import  { useRouter } from 'next/router'
 
 
 
-export default function Home({ pokemon }) {
+function Home({ pokemon } ) {
+
+  const { isFallback } = useRouter();
+  
   console.log(pokemon)
+  
 
   return (
     <>
-    { pokemon?
+    { isFallback?  <h1> Loading...</h1>  :
     <Layout title='Home'>
           <Heading fontSize='4xl' m={8}>Cards</Heading>
             <Grid  templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)', '2xl': 'repeat(5, 1fr)'}} gap={4} p={10}>
@@ -72,15 +78,18 @@ export default function Home({ pokemon }) {
               ))}
             </Grid>
     </Layout>
-    : <h1> Loading...</h1> }
+    }
     </>
   )
 }
 
 
 
-export async function getStaticProps(context) {
+export async function getStaticProps( ) {
+
+  
   try {
+    
     const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100')
     const { results } = await res.json()
     const pokemon = results.map((result, index) => {
@@ -90,9 +99,13 @@ export async function getStaticProps(context) {
         ...result,
         image
       }
+      
     })
+
     return {
-      props: { pokemon }
+      props: { pokemon } ,
+      revalidate: 1000
+      
     }
 
   } catch (err) {
@@ -100,3 +113,5 @@ export async function getStaticProps(context) {
   }
 
 }
+
+export default Home
