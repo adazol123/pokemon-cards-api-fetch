@@ -7,7 +7,7 @@ import { ChevronLeftIcon, ArrowBackIcon } from "@chakra-ui/icons"
 import { motion } from "framer-motion"
 
 const Pokemoon = ({ pokeman }) => {
-    const { id, image, name, weight, height, types, species: { name: speciesName}, abilities, moves } = pokeman //basic destructure
+    const { image, name, weight, height, types, species: { name: speciesName}, abilities, moves } = pokeman //basic destructure
     // console.log(pokeman)
     // console.log(speciesName)
     // const { ability: { name: abiName} } = one
@@ -23,7 +23,7 @@ const Pokemoon = ({ pokeman }) => {
     //     abilName = abiName
     // })
     // const ids = query.id
-    console.log(pokeman)
+    // console.log(pokeman)
     const { isFallback } = useRouter()
     return (
         <>
@@ -98,7 +98,7 @@ const Pokemoon = ({ pokeman }) => {
 
 export async function getStaticPaths() {
     try {
-        const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100')
+        const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=80')
         const { results } = await res.json()
         const paths = results.map((result, index) => {
           const _id = (index + 1).toString()
@@ -109,11 +109,11 @@ export async function getStaticPaths() {
         })
         return {
           paths ,
-         fallback: true,
+         fallback: false,
           
         }
       } catch (err) {
-        console.error('Error Paths' + err);
+        console.error(err);
       }
 }
  
@@ -132,7 +132,7 @@ export async function getStaticProps({ params }) {
         }
 
     } catch (err) {
-        console.error('Error props' + err);
+        console.error(err);
     }
 }
 
