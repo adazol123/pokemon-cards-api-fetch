@@ -12,19 +12,21 @@ import  { useRouter } from 'next/router'
 
 function Home({ pokemon } ) {
 
-  const { isFallback } = useRouter();
+  // const { isFallback } = useRouter();
+  const [{ id }] = pokemon
   
   console.log(pokemon)
+  console.log(id)
   
 
   return (
     <>
-    { isFallback?  <h1> Loading...</h1>  :
+  
     <Layout title='Home'>
           <Heading fontSize='4xl' m={8}>Cards</Heading>
             <Grid  templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)', '2xl': 'repeat(5, 1fr)'}} gap={4} p={10}>
-              {pokemon.map((pokeman, index) => (
-                  <NextLink key={index} href={`/pokemon?id=${index +1}`}>
+              {pokemon.map((pokeman) => (
+                  <NextLink key={pokeman.id} href={`/pokemoon/${pokeman.id}`}>
                       <a className={styles.tags}>
                         <Box
                           boxShadow="base"
@@ -78,7 +80,7 @@ function Home({ pokemon } ) {
               ))}
             </Grid>
     </Layout>
-    }
+    
     </>
   )
 }
@@ -89,29 +91,30 @@ export async function getStaticProps( ) {
 
   
   try {
-    
     const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100')
     const { results } = await res.json()
     const pokemon = results.map((result, index) => {
       const paddedIndex = ('00' + ( index + 1)).slice(-3)
       const image =`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${paddedIndex}.png`
-      return {
-        ...result,
-        image
+      const id = (index + 1).toString()
+      return { id,
+        ...result, 
+        image, 
       }
       
     })
-
     return {
       props: { pokemon } ,
       revalidate: 1000
       
     }
-
   } catch (err) {
     console.error(err);
   }
 
 }
+
+
+
 
 export default Home

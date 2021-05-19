@@ -1,14 +1,12 @@
-import Layout from "../components/Layout"
+import { useRouter } from 'next/router'
+import Layout from "../../components/Layout"
 import NextLink from 'next/link'
 import { Heading, Text, Button, Flex, Stack, HStack, Tag, Image, Img, Grid } from "@chakra-ui/react"
 import NextImage from "next/image"
 import { ChevronLeftIcon, ArrowBackIcon } from "@chakra-ui/icons"
-import { useRouter } from 'next/router'
 import { motion } from "framer-motion"
 
-
-
-export default function pokemon({ pokeman  } ) {
+const Pokemoon = ({ pokeman }) => {
     const { id, image, name, weight, height, types, species: { name: speciesName}, abilities, moves } = pokeman //basic destructure
     // console.log(pokeman)
     // console.log(speciesName)
@@ -25,7 +23,7 @@ export default function pokemon({ pokeman  } ) {
     //     abilName = abiName
     // })
     // const ids = query.id
-    console.log(id)
+    console.log(pokeman)
     const { isFallback } = useRouter()
     return (
         <>
@@ -98,11 +96,30 @@ export default function pokemon({ pokeman  } ) {
     )
 }
 
+export async function getStaticPaths() {
+    try {
+        const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100')
+        const { results } = await res.json()
+        const paths = results.map((result, index) => {
+          const _id = (index + 1).toString()
+          return {
+            params: { id: _id },
+          }
+          
+        })
+        return {
+          paths ,
+         fallback: true,
+          
+        }
+      } catch (err) {
+        console.error('Error Paths' + err);
+      }
+}
+ 
 
-
-export async function getServerSideProps({ query }) {
-   
-    const id = query.id
+export async function getStaticProps({ params }) {
+    const id = params.id
     try {
         const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
         const pokeman = await res.json()
@@ -111,13 +128,13 @@ export async function getServerSideProps({ query }) {
         pokeman.image = image
         return {
             props: { pokeman },
-             
+            revalidate: 1000,
         }
 
     } catch (err) {
-        console.error(err);
+        console.error('Error props' + err);
     }
 }
 
 
-
+export default Pokemoon;
