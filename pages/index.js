@@ -87,9 +87,13 @@ function Home({ pokemon } ) {
 
 
 
-export async function getStaticProps( ) {
+export async function getStaticProps( )  {
 
-  
+  // const currentPage = ctx.params?.currentPage
+  // const currentPageNumber = +(currentPage || 0)
+  // const min = currentPageNumber * 5
+  // const max = (currentPageNumber + 1) * 5
+
   try {
     const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100')
     const { results } = await res.json()

@@ -30,7 +30,7 @@ const Pokemoon = ({ pokeman }) => {
         {isFallback? <h1>Loading</h1> :
         <Layout title={ name} >
             <Flex my={2} px={2} justifyContent='flex-start' w='100vw' alignItems='center'>
-                <NextLink href='/'>
+                <NextLink href='/' as={`${pokeman.id}`}>
                     <a>
                     <Button>
                         <ChevronLeftIcon mr={2} w={8} h={8}/>
@@ -100,7 +100,7 @@ export async function getStaticPaths() {
     try {
         const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=80')
         const { results } = await res.json()
-        const paths = results.map((result, index) => {
+        const paths = results.map((_, index) => {
           const _id = (index + 1).toString()
           return {
             params: { id: _id },
