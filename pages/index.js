@@ -95,7 +95,7 @@ export async function getStaticProps( )  {
   // const max = (currentPageNumber + 1) * 5
 
   try {
-    const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100')
+    const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=80')
     const { results } = await res.json()
     const pokemon = results.map((result, index) => {
       const paddedIndex = ('00' + ( index + 1)).slice(-3)
