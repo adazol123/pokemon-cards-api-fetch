@@ -30,7 +30,7 @@ const Pokemoon = ({ pokeman }) => {
         {isFallback? <h1>Loading</h1> :
         <Layout title={ name} >
             <Flex my={2} px={2} justifyContent='flex-start' w='100vw' alignItems='center'>
-                <NextLink href='/' as={`${pokeman.id}`} scroll={false} replace>
+                <NextLink href='/' as='Daniel' scroll={false}>
                     <a>
                     <Button>
                         <ChevronLeftIcon mr={2} w={8} h={8}/>
