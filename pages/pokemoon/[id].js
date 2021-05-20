@@ -25,14 +25,15 @@ const Pokemoon = ({ pokeman }) => {
     // const ids = query.id
     // console.log(pokeman)
     const { isFallback } = useRouter()
+    const router = useRouter()
     return (
         <>
         {isFallback? <h1>Loading</h1> :
         <Layout title={ name} >
             <Flex my={2} px={2} justifyContent='flex-start' w='100vw' alignItems='center'>
-                <NextLink href='/' as='Daniel' scroll={false}>
+                <NextLink scroll={false}>
                     <a>
-                    <Button>
+                    <Button onClick={() => router.push('/')}>
                         <ChevronLeftIcon mr={2} w={8} h={8}/>
                        Back
                     </Button>
