@@ -33,7 +33,7 @@ const Pokemoon = ({ pokeman }) => {
             <Flex my={2} px={2} justifyContent='flex-start' w='100vw' alignItems='center'>
                 <NextLink scroll={false}>
                     <a>
-                    <Button onClick={() => router.push('/')}>
+                    <Button onClick={() => router.back()}>
                         <ChevronLeftIcon mr={2} w={8} h={8}/>
                        Back
                     </Button>
