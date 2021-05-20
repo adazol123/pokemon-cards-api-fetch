@@ -31,14 +31,14 @@ const Pokemoon = ({ pokeman }) => {
         {isFallback? <h1>Loading</h1> :
         <Layout title={ name} >
             <Flex my={2} px={2} justifyContent='flex-start' w='100vw' alignItems='center'>
-                <NextLink scroll={false}>
-                    <a>
+                {/* <NextLink scroll={false}> */}
+                    {/* <a> */}
                     <Button onClick={() => router.back()}>
                         <ChevronLeftIcon mr={2} w={8} h={8}/>
                        Back
                     </Button>
-                    </a>
-                </NextLink>
+                    {/* </a> */}
+                {/* </NextLink> */}
             </Flex>
             <Flex flex={1} flexDirection='column' alignItems='center' justifyContent='center' px={6}>
                 <Image as={motion.img } srcSet={image} alt={name} width={300} height={300} quality={20} priority
