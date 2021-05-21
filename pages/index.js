@@ -13,27 +13,61 @@ import  { useRouter } from 'next/router'
 function Home({ pokemon } ) {
 
   // const { isFallback } = useRouter();
-  const [{ id }] = pokemon
+  // const [{ id }] = pokemon
   
-  console.log(pokemon)
-  console.log(id)
-  
+  // console.log(pokemon)
+  // console.log(id)
+  const variants = {
+    hidden: { opacity: 0},
+    visible: { opacity: 1}
+  }
+  const easing = [0.6,-0.05,0.01,0.99]
+  const fadeInUp = {
+    initial: {
+      y: 60,
+      opacity: 0
+    },
+    animate: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: easing 
+      }
+    }
+  }
+
+  const stagger = {
+    animate: {
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  }
 
   return (
-    <>
+    <motion.div className='main_div'
+      exit='initial'
+      initial='exit'
+      animate='animate'
+    >
   
     <Layout title='Home'>
           <Heading fontSize='4xl' m={8}>Cards</Heading>
-            <Grid  templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)', '2xl': 'repeat(5, 1fr)'}} gap={4} p={10}>
+            <Grid className='content_div_01' as={motion.div}  templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)', '2xl': 'repeat(5, 1fr)'}} gap={4} p={10} variants={stagger}>
               {pokemon.map((pokeman) => (
                   <NextLink key={pokeman.id} href={`/pokemoon/${pokeman.id}`}>
-                      <a className={styles.tags}>
-                        <Box
+                      
+                        <Flex as={motion.div}
+                          className='cards'
+                          variants={fadeInUp}
+                          whileHover={{ scale: 1.05}}
+                          whileTap={{ scale: 0.9 }}
                           boxShadow="base"
                           cursor='pointer'
                           _hover={{
-                            background: 'blackAlpha.100',
-                            color: "teal.400",
+                            background: 'blackAlpha.300',
+                            color: "green.400",
                             fontWeight:'semibold',
                             boxShadow:"lg",
                             varient: 'smooth'
@@ -59,21 +93,24 @@ function Home({ pokemon } ) {
                           borderRadius={30} 
                           userSelect='none'
                           p={8} >
-                            <Image as={ motion.img } src={pokeman.image} srcSet={pokeman.image} alt={pokeman.name} width={200} height={200} quality={10} 
+                            <a className={styles.tags}>
+                            <Img as={motion.img}  src={pokeman.image} alt={pokeman.name} width={200} height={200} quality={1} 
                               layoutId={pokeman.image}
-                              animate={{ scale: 0.9 }}
-                              whileHover={{ scale: 1.1 }}
-                              whileTap={{ scale: 1.0 }}
-                              whileFocus={{scale : 1.4}}
+                              variants={fadeInUp}
+                              transition={{ delay: 0.2}}
+                              // initial={{ x: 200, opacity: 0}}
+                              // animate={{ x: 0, opacity: 1}}
+                              // transition={{ delay: 0.2 }}
                               />
                             {/* <span>{ index + 1 } </span> */}
                             <Heading as={motion.h1} fontSize="md" 
-                            layoutId={pokeman.name}
+                                                variants={fadeInUp}
                              >
                             { pokeman.name }
                             </Heading> 
-                        </Box>
-                      </a>
+                            </a>
+                        </Flex>
+
                                         
                   </NextLink>
                 
@@ -81,7 +118,7 @@ function Home({ pokemon } ) {
             </Grid>
     </Layout>
     
-    </>
+    </motion.div>
   )
 }
 

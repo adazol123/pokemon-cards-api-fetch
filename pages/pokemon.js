@@ -45,6 +45,7 @@ export default function pokemon({ pokeman  } ) {
                 <Image as={motion.img } srcSet={image} alt={name} width={300} height={300} quality={20} priority
                     layoutId={image}
                     whileTap={{ scale: 0.8 }}
+                    transition={{ duration: 2 }}
                     />
                 <Heading as={motion.h1} mb={2} fontSize='4xl' textTransform='capitalize' color="teal.400"
                     layoutId={name}> { name }</Heading>

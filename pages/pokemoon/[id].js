@@ -24,29 +24,44 @@ const Pokemoon = ({ pokeman }) => {
     // })
     // const ids = query.id
     // console.log(pokeman)
-    const { isFallback } = useRouter()
+    // const { isFallback } = useRouter()
     const router = useRouter()
+
+    const varients = {
+        hidden: { opacity: 0},
+        visible: { opacity: 1}
+    
+    }
+
     return (
         <>
-        {isFallback? <h1>Loading</h1> :
+        {
         <Layout title={ name} >
-            <Flex my={2} px={2} justifyContent='flex-start' w='100vw' alignItems='center'>
-                {/* <NextLink scroll={false}> */}
-                    {/* <a> */}
-                    <Button onClick={() => router.back()}>
+            <Flex as={motion.div} my={2} px={2} justifyContent='flex-start' w='100vw' alignItems='center'
+                exit='initial'
+                initial='exit'
+                animate='animate'
+            >
+                <NextLink href='/' scroll={false}>
+                    <a>
+                    <Button>
                         <ChevronLeftIcon mr={2} w={8} h={8}/>
                        Back
                     </Button>
-                    {/* </a> */}
-                {/* </NextLink> */}
+                    </a>
+                </NextLink>
             </Flex>
             <Flex flex={1} flexDirection='column' alignItems='center' justifyContent='center' px={6}>
-                <Image as={motion.img } srcSet={image} alt={name} width={300} height={300} quality={20} priority
-                    layoutId={image}
+                <Img as={motion.img } src={image} alt={name} width={300} height={300} quality={2}
+                    layoutId={pokeman.image}
+                    variants={varients}
+                    transition={{ delay: 0.2}}
                     whileTap={{ scale: 0.8 }}
                     />
                 <Heading as={motion.h1} mb={2} fontSize='4xl' textTransform='capitalize' color="teal.400"
-                    layoutId={name}> { name }</Heading>
+                    variants={varients}
+                    transition={{ delay: 0.2}}
+                    > { name }</Heading>
                 <hr />
                 <br />
                 
